@@ -1,0 +1,8 @@
+{{ if .Params.toc | default true }}
+{{ with .TableOfContents }}
+<aside class="toc-sidebar">
+    <h3>目录</h3>
+    {{ . }}
+</aside>
+{{ end }}
+{{ end }}

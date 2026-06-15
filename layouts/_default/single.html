@@ -1,0 +1,22 @@
+{{ define "main" }}
+<div class="post-layout">
+    <!-- Post content: title, meta, body, tags -->
+    <article class="post-content">
+        <h1>{{ .Title }}</h1>
+        <div class="post-meta">
+            <span>Published: {{ .Date.Format "2006-01-02" }}</span>
+            {{ with .Lastmod }}
+            {{ if ne (.Format "2006-01-02") ($.Date.Format "2006-01-02") }}
+            <span>Edited: {{ .Format "2006-01-02" }}</span>
+            {{ end }}
+            {{ end }}
+            {{ with .Params.author }}<span>{{ . }}</span>{{ end }}
+            {{ with .ReadingTime }}<span>{{ . }} min read</span>{{ end }}
+        </div>
+        {{ .Content }}
+        {{ partial "tags.html" . }}
+    </article>
+    <!-- TOC sidebar (defined in toc.html partial) -->
+    {{ partial "toc.html" . }}
+</div>
+{{ end }}

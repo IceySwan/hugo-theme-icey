@@ -1,0 +1,49 @@
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            <span>© <span id="footer-year-start"></span>-<span id="footer-year-now"></span> <a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></span>
+            <span class="footer-sep">|</span>
+            <a href="{{ `index.xml` | absURL }}"><i class="fas fa-rss"></i> RSS</a>
+            <span class="footer-sep">|</span>
+            <a href="{{ `sitemap.xml` | absURL }}"><i class="fas fa-sitemap"></i> Sitemap</a>
+        </div>
+        <div class="footer-center">
+            <span><i class="fas fa-eye"></i> <span id="busuanzi_value_site_pv"></span></span>
+            <span class="footer-sep">|</span>
+            <span><i class="fas fa-users"></i> <span id="busuanzi_value_site_uv"></span></span>
+        </div>
+        <div class="footer-right">
+            <span class="footer-uptime" id="site-uptime"></span>
+        </div>
+    </div>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+    (function () {
+        var since = "{{ hugo.Data.site.since }}";
+        if (!since) return;
+        var parts = since.split("-");
+        var startYear = parseInt(parts[0]);
+        var start = new Date(startYear, parseInt(parts[1]) - 1, parseInt(parts[2]));
+        var now = new Date();
+        document.getElementById("footer-year-start").textContent = startYear;
+        document.getElementById("footer-year-now").textContent = now.getFullYear();
+        var years = now.getFullYear() - start.getFullYear();
+        var months = now.getMonth() - start.getMonth();
+        var days = now.getDate() - start.getDate();
+        if (days < 0) {
+            months--;
+            var prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+            days += prevMonth.getDate();
+        }
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+        var text = "艰难运行 ";
+        if (years > 0) text += years + " 年 ";
+        if (months > 0) text += months + " 月 ";
+        text += days + " 天";
+        document.getElementById("site-uptime").textContent = text;
+    })();
+</script>

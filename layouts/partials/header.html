@@ -1,0 +1,11 @@
+<!-- Navigation bar: menu items from hugo.toml [menu] -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <div class="nav-links">
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL | absURL }}">{{ .Name }}</a>
+            {{ end }}
+            <a href="javascript:void(0)" class="nav-search" onclick="toggleSearch()" aria-label="Search"><i class="fas fa-search"></i></a>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,45 @@
+{{ define "main" }}
+<div class="profile">
+    <!-- Profile header: avatar | author + one-line bio -->
+    <div class="profile-header">
+        {{ $avatar := resources.GetMatch (printf "%s*" (.Site.Params.avatar | default "avatar.png")) }}
+        {{ if $avatar }}
+        <img src="{{ $avatar.RelPermalink }}" alt="Avatar" class="profile-avatar">
+        {{ end }}
+        <div class="profile-info">
+            <h1 class="profile-name">{{ hugo.Data.site.author | default .Site.Title }}</h1>
+            <p class="profile-bio">{{ hugo.Data.site.bio }}</p>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Multi-paragraph about section (from assets/) -->
+    {{ $aboutFile := .Site.Params.aboutFile | default "readme.md" }}
+    {{ $about := resources.Get $aboutFile }}
+    {{ if $about }}
+    <div class="profile-about">{{ $about.Content | markdownify }}</div>
+    <hr>
+    {{ end }}
+
+    <!-- Latest posts: count configurable via params.homePostsCount -->
+    {{ $posts := where .Site.RegularPages "Section" "posts" }}
+    {{ $count := .Site.Params.homePostsCount | default 5 }}
+    {{ if gt (len $posts) 0 }}
+    <div class="post-list">
+        <h2>最新文章</h2>
+        {{ range first $count $posts }}
+        <div class="post-item">
+            <div class="post-item-header">
+                <span class="post-item-title">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </span>
+                <span class="post-item-date">{{ .Date.Format "2006-01-02" }}</span>
+            </div>
+            {{ with .Params.summary }}<p class="post-item-summary">{{ . }}</p>{{ end }}
+            {{ partial "tags.html" . }}
+        </div>
+        {{ end }}
+    </div>
+    {{ end }}
+</div>
+{{ end }}

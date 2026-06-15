@@ -1,0 +1,11 @@
+<!-- Tag list partial: displays clickable tag badges -->
+{{ with .Params.tags }}
+{{ if gt (len .) 0 }}
+<div class="tag-list">
+    {{ range . }}
+    {{ $tag := . | urlize }}
+    <a href="{{ `tags/` | absURL }}{{ $tag }}/">#{{ . }}</a>
+    {{ end }}
+</div>
+{{ end }}
+{{ end }}

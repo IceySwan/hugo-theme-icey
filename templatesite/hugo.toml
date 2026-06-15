@@ -1,0 +1,58 @@
+baseURL = 'https://example.com/'
+locale = 'zh-cn'
+title = 'My Blog'
+theme = 'icey'
+enableRobotsTXT = true
+summarylength = 70
+timeZone = "Asia/Shanghai"
+cleanDestinationDir = true
+
+[params]
+  description = "A personal blog powered by Hugo and Icey theme."
+  logo = "logo.png"
+  avatar = "avatar.png"
+  aboutFile = "readme.md"
+  homePostsCount = 5
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    identifier = "archive"
+    name = "Archive"
+    url = "/archive/"
+    weight = 10
+  [[menu.main]]
+    identifier = "notes"
+    name = "Notes"
+    url = "/notes/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 30
+
+[markup]
+[markup.tableOfContents]
+startLevel = 2
+endLevel = 3
+ordered = false
+[markup.highlight]
+style = "github"
+lineNos = false
+
+[outputs]
+home = ["HTML", "RSS", "Sitemap"]
+section = ["HTML", "RSS"]
+
+[sitemap]
+filename = "sitemap.xml"
+changefreq = "weekly"
+priority = 0.5
+
+[rss]
+limit = 20

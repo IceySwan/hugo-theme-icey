@@ -1,0 +1,26 @@
+<div class="search-overlay" id="search-overlay" onclick="if(event.target===this)toggleSearch()">
+    <div class="search-box">
+        <input type="text" id="search-input" placeholder="Search..."
+            onkeydown="if(event.key==='Enter'){window.open('https://www.google.com/search?q=site:'+encodeURIComponent(location.origin)+'+'+encodeURIComponent(this.value),'_blank');toggleSearch();}"
+            autofocus>
+    </div>
+</div>
+<script>
+    function toggleSearch() {
+        var overlay = document.getElementById('search-overlay');
+        overlay.classList.toggle('active');
+        if (overlay.classList.contains('active')) {
+            document.getElementById('search-input').focus();
+        }
+    }
+    document.addEventListener('keydown', function (e) {
+        if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+            e.preventDefault();
+            toggleSearch();
+        }
+        if (e.key === 'Escape') {
+            var overlay = document.getElementById('search-overlay');
+            if (overlay.classList.contains('active')) toggleSearch();
+        }
+    });
+</script>

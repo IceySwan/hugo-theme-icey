@@ -1,0 +1,9 @@
+name = "icey"
+license = "MIT"
+licenselink = "https://github.com/"
+description = "A clean, minimal Hugo theme with grid background"
+tags = ["minimal", "clean", "blog"]
+min_version = "0.100.0"
+
+[author]
+name = "Icey Swan"

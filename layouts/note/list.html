@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="container">
+    <div class="note-list">
+        <h1>{{ .Title | default "Notes" }}</h1>
+        {{ .Content }}
+        {{ $notes := where .Site.RegularPages "Section" "note" }}
+        {{ range $notes }}
+        <div class="note-card">
+            <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+            <div class="note-date">{{ .Date.Format "2006-01-02" }}</div>
+            {{ with .Params.summary }}<p>{{ . }}</p>{{ end }}
+        </div>
+        {{ end }}
+    </div>
+</div>
+{{ end }}
